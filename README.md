@@ -1,2 +1,1 @@
-# Mochila-de-viagem
-Desenvolvimento de JavaScript
+# alura-armazenando-na-web
