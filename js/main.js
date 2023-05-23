@@ -1,6 +1,6 @@
 const form = document.getElementById("novoItem");
 const lista = document.getElementById("lista");
-const itens = JSON.parse(localStorage.getItem("itens")) || []; //Declara um array de nome itens: //Lista vazia // parse para transformar em JavaScript
+const itens = JSON.parse(localStorage.getItem("itens")) || []; //Declara um array de nome itens: //Lista vazia // JSON.parse para transformar em JavaScript
 
 console.log(itens)
 console.log([])
