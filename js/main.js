@@ -1,4 +1,3 @@
-// Operador lógico que retorna com dados salvos, ou string vazia, utilizando localStorage.getItem, modificando o valor de `string` com JSON.parse()
 const form = document.getElementById("novoItem");
 const lista = document.getElementById("lista");
 const itens = JSON.parse(localStorage.getItem("itens")) || []; //Declara um array de nome itens: //Lista vazia // JSON.parse() para parsear,interpretar,decodificar em JavaScript
@@ -21,6 +20,7 @@ form.addEventListener("submit", (evento) => {
     const nome = evento.target.elements['nome']
     const quantidade = evento.target.elements['quantidade']
 
+    //  Const para conferir elemento nome no array itens 
     const existe = itens.find(elemento => elemento.nome === nome.value)
 
       //Transforme a variável já criada, itemAtual, em um objeto object que receba os valores de nome e quantidade, transforma estes valores em string em localStorage:
@@ -62,7 +62,9 @@ function criaElemento(item) {
     numeroItem.dataset.id = item.id
     novoItem.appendChild(numeroItem) 
     
-    numeroItem.innerHTML += item.nome
+    novoItem.innerHTML += item.nome
+
+    novoItem.appendChild(botaoDeleta(item, id))
 
     lista.appendChild(novoItem)
 
@@ -72,5 +74,23 @@ function atualizaElemento(item) {
     document.querySelector("[data-id='"+item.id+"']").innerHTML = item.quantidade
 }
 
+function botaoDeleta(id) {
+    const elementoBotao = document.createElement("button")
+    elementoBotao.innerText = "X"
 
+    elementoBotao.addEventListener("click", function() {
+        deletaElemento(this.parentNode, id)
+    })
 
+    return elementoBotao
+}
+
+function deletaElemento(tag, id) {
+    tag.remove()
+
+    itens.splice(itens.findIndex(elemento => elemento.id == id), 1)
+
+    console.log(itens)
+
+    //escrever no localStorage
+}
