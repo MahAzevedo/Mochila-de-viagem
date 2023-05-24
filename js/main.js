@@ -14,7 +14,6 @@ itens.forEach( (elemento) => {
     criaElemento(elemento)
 } )
 
-// Refatoração do addEventListener para receber as funções extras da função criaElemento
 form.addEventListener("submit", (evento) => {
     evento.preventDefault();
 
@@ -22,18 +21,28 @@ form.addEventListener("submit", (evento) => {
     const nome = evento.target.elements['nome']
     const quantidade = evento.target.elements['quantidade']
 
+    const existe = itens.find(elemento => elemento.nome === nome.value)
 
       //Transforme a variável já criada, itemAtual, em um objeto object que receba os valores de nome e quantidade, transforma estes valores em string em localStorage:
-     const itemAtual = {
+      const itemAtual = {
         "nome": nome.value,
         "quantidade": quantidade.value
     }
 
-    criaElemento(itemAtual)
+    if (existe) {
+        itemAtual.id = existe.id
+        
+        atualizaElemento(itemAtual)
+    } else {
+        itemAtual.id = itens.length
 
-    //Insire a variável itemAtual nesse array itens, utilizando o método push:
-    itens.push(itemAtual)
+        criaElemento(itemAtual)
 
+        //Insire a variável itemAtual nesse array itens, utilizando o método push:
+        itens.push(itemAtual)
+    }
+
+    
      //transforma estes valores em string:
     localStorage.setItem('itens', JSON.stringify(itens))
 
@@ -48,10 +57,15 @@ function criaElemento(item) {
 
     const numeroItem = document.createElement("strong") 
     numeroItem.innerHTML = item.quantidade
+    numeroItem.dataset.id = item.id
     novoItem.appendChild(numeroItem) 
     
     numeroItem.innerHTML += item.nome
 
     lista.appendChild(novoItem)
 
+}
+
+function atualizaElemento(item) {
+    document.querySelector()
 }
