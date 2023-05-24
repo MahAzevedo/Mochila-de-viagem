@@ -24,7 +24,7 @@ form.addEventListener("submit", (evento) => {
     const existe = itens.find(elemento => elemento.nome === nome.value)
 
       //Transforme a variável já criada, itemAtual, em um objeto object que receba os valores de nome e quantidade, transforma estes valores em string em localStorage:
-      const itemAtual = {
+    const itemAtual = {
         "nome": nome.value,
         "quantidade": quantidade.value
     }
@@ -33,6 +33,8 @@ form.addEventListener("submit", (evento) => {
         itemAtual.id = existe.id
         
         atualizaElemento(itemAtual)
+
+        itens[existe.id] = itemAtual
     } else {
         itemAtual.id = itens.length
 
@@ -67,5 +69,8 @@ function criaElemento(item) {
 }
 
 function atualizaElemento(item) {
-    document.querySelector()
+    document.querySelector("[data-id='"+item.id+"']").innerHTML = item.quantidade
 }
+
+
+
