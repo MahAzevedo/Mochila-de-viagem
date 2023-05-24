@@ -1,3 +1,4 @@
+// Operador lógico que retorna com dados salvos, ou string vazia, utilizando localStorage.getItem, modificando o valor de `string` com JSON.parse()
 const form = document.getElementById("novoItem");
 const lista = document.getElementById("lista");
 const itens = JSON.parse(localStorage.getItem("itens")) || []; //Declara um array de nome itens: //Lista vazia // JSON.parse() para parsear,interpretar,decodificar em JavaScript
@@ -8,11 +9,12 @@ Significa extrair conteúdos de um conjunto de caracteres (geralmente separados 
 Os possíveis significados são: "decodificar" ; "interpretar" e dependendo do caso "converter".
 */
 
-
+// Uso do forEach para que todos os itens já escritos na lista sejam mantidos ao atualizar a página 
 itens.forEach( (elemento) => {
     criaElemento(elemento)
 } )
 
+// Refatoração do addEventListener para receber as funções extras da função criaElemento
 form.addEventListener("submit", (evento) => {
     evento.preventDefault();
 
