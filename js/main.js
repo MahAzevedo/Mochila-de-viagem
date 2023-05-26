@@ -20,7 +20,7 @@ form.addEventListener("submit", (evento) => {
     const nome = evento.target.elements['nome']
     const quantidade = evento.target.elements['quantidade']
 
-    //  Const para conferir elemento nome no array itens 
+    //  Const para conferir se existe elemento nome no array itens 
     const existe = itens.find(elemento => elemento.nome === nome.value)
 
       //Transforme a variável já criada, itemAtual, em um objeto object que receba os valores de nome e quantidade, transforma estes valores em string em localStorage:
@@ -28,7 +28,7 @@ form.addEventListener("submit", (evento) => {
         "nome": nome.value,
         "quantidade": quantidade.value
     }
-
+    
     if (existe) {
         itemAtual.id = existe.id
         
@@ -36,7 +36,7 @@ form.addEventListener("submit", (evento) => {
 
         itens[existe.id] = itemAtual
     } else {
-        itemAtual.id = itens.length
+        itemAtual.id = itens[itens.length -1] ? (itens[itens.length -1]).id +1 : 0;
 
         criaElemento(itemAtual)
 
@@ -46,7 +46,7 @@ form.addEventListener("submit", (evento) => {
 
     
      //transforma estes valores em string:
-    localStorage.setItem('itens', JSON.stringify(itens))
+    localStorage.setItem("itens", JSON.stringify(itens))
 
     nome.value = ""
     quantidade.value = ""
@@ -64,7 +64,7 @@ function criaElemento(item) {
     
     novoItem.innerHTML += item.nome
 
-    novoItem.appendChild(botaoDeleta(item, id))
+    novoItem.appendChild(botaoDeleta(item.id))
 
     lista.appendChild(novoItem)
 
